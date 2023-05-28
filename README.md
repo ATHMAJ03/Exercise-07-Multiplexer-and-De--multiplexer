@@ -47,78 +47,83 @@ If the control input changes to AB = 10, then all the gates are restricted excep
  
  
 ### Procedure
-/* 
-```
-STEP 1:
-Create a project with required entities.
-STEP 2:
-Create a module along with respective file name for both Multiplexer and De-multiplexer.
-STEP 3:
-Run the module and get the respective RTL outputs.
-STEP4:
-Create university program(VWF) for getting timing diagram.
-STEP 5:
-Give the respective inputs for timing diagram and obtain the results.
-```
-*/
+
+Step 1: Start the module using module projname().
+
+Step 2: Declare the inputs and outputs along with the select lines according to the multiplexer and demultiplexer.
+
+Step 3: Use wire to assign intermediate outputs.
+
+Step 4: Use and,or and not gates to get the desired output.
+
+Step 5: End the module.
+
+Step 6: Generate RTL realization and timing diagrams.
 
 
 ### PROGRAM 
+```
 /*
 Program for flipflops  and verify its truth table in quartus using Verilog programming.
 Developed by: ATHMAJ VENUGOPAL
 RegisterNumber:  212222240014
 */
-###4x1 Multiplexer:
 ```
-module 4mux ( s0,s1,a0,a1,a2,a3,y);
-input s0,s1,a0,a1,a2,a3;
-output y;
-wire a,b,c,d,s0bar,s1bar;
-not (s0bar,s0);
-not (s1bar,s1);
-and (a,s0,s1,a3);
-and (b,s0bar,s1,a2);
-and (c,s0,s1bar,a1);
-and (d,s0bar,s1bar,a0);
-or (y,a,b,c,d);
+### Multiplexer:
+```
+module mux(I0,I1,I2,I3,S0,S1,Y);
+input I0,I1,I2,I3,S0,S1;
+output Y;
+wire S0C,S1C;
+not(S0C,S0);
+not(S1C,S1);
+wire P,Q,R,S;
+and(P,S0C,S1C,I0);
+and(Q,S0C,S1,I1);
+and(R,S0,S1C,I2);
+and(S,S0,S1,I3);
+or(Y,P,Q,R,S);
 endmodule
 ```
-###1x4 De-Multiplexer:
+### De-Multiplexer:
 ```
-module demuxx(Y0,Y1,Y2,Y3,S0,S1,I);
+module demux(I,S0,S1,Y0,Y1,Y2,Y3);
 input I,S0,S1;
 output Y0,Y1,Y2,Y3;
-wire S0c,S1c;
-not(S0c,S0);
-nor(S1c,S1);
-and (Y0,I,S0c,S1c);
-and(Y1,I,S0c,S1);
-and(Y2,I,S0,S1c);
+wire S0C,S1C;
+not(S0C,S0);
+not(S1C,S1);
+and(Y0,I,S0C,S1C);
+and(Y1,I,S0C,S1);
+and(Y2,I,S0,S1C);
 and(Y3,I,S0,S1);
 endmodule
 ```
 
 ### RTL LOGIC  
-
-![image](muxx.png)
-
-
+#### MULTIPLEXER
+![image](https://github.com/ATHMAJ03/Exercise-07-Multiplexer-and-De--multiplexer/assets/118753139/e3640c39-0479-42ef-9255-40ddc75f6dbb)
 
 
-
+#### DEMULTIPLEXER
+![image](https://github.com/ATHMAJ03/Exercise-07-Multiplexer-and-De--multiplexer/assets/118753139/7397b62b-b5d2-45ad-b9cf-5d25feb1ff7a)
 
 ### TIMING DIGRAMS  
+#### MULTIPLEXER
+![image](https://github.com/ATHMAJ03/Exercise-07-Multiplexer-and-De--multiplexer/assets/118753139/32d495ed-9cbd-4f07-93aa-ac5d7a5f64d4)
 
 
-
+#### DEMULTIPLEXER
+![image](https://github.com/ATHMAJ03/Exercise-07-Multiplexer-and-De--multiplexer/assets/118753139/d153e7d8-f324-491c-9f27-e60aa11b0696)
 
 
 ### TRUTH TABLE 
+#### MULIPLEXER
+![image](https://github.com/ATHMAJ03/Exercise-07-Multiplexer-and-De--multiplexer/assets/118753139/c4c54fba-e888-4e85-909d-bb227a111315)
 
 
-
-
-
+#### DEMULTIPLEXER
+![image](https://github.com/ATHMAJ03/Exercise-07-Multiplexer-and-De--multiplexer/assets/118753139/d1c456ee-fa59-425b-95f2-f546380ac279)
 
 ### RESULTS 
+Hence 4x1 Multiplexer and 1x4 Demultiplexer is been implemented and verified using verilog programming and its output are validated.
